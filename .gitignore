@@ -1,2 +1,59 @@
-venv
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# ---- Virtual Environments ----
+venv/
+.env/
+.env.local
+.venv/
+env/
+ENV/
 .env
+venv
+
+# ---- IDE / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ---- FastAPI / Backend ----
+*.log
+.mypy_cache/
+pytest_cache/
+.coverage
+htmlcov/
+__pycache__/
+instance/
+uploads/
+staticfiles/
+*.pid
+
+# ---- Docker ----
+*.pid
+*.sock
+.dockerignore
+docker-compose.override.yml
+# docker-compose.yml은 보통 버전관리함 (공유 필요 시 제외 X)
+
+# ---- Node / React ----
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env.local
+frontend/.next/
+frontend/.vercel/
+frontend/.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---- Editor backups ----
+*.swp
+*.swo
+*~
