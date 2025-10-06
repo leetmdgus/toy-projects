@@ -1,7 +1,7 @@
-from domain.posts.entities import Post
-from domain.posts.repository import PostRepository
-from infrastructure.orm.post_model import PostModel
-from core.database import SessionLocal
+from app.domain.posts.entities import Post
+from app.domain.posts.repository import PostRepository
+from app.infrastructure.orm.post_model import PostModel
+from app.core.database import SessionLocal
 
 class SQLAlchemyPostRepository(PostRepository):
     def __init__(self):
