@@ -1,5 +1,5 @@
-from domain.posts.entities import Post
-from domain.posts.repository import PostRepository
+from app.domain.posts.entities import Post
+from app.domain.posts.repository import PostRepository
 from datetime import datetime
 
 class CreatePostUseCase:
