@@ -20,6 +20,23 @@ class FakePostRepository(PostRepository):
                 return p
         return None
 
+    def get_all(self) -> list[Post]:
+        return self._storage.copy()
+
+    def update(self, post: Post) -> Post | None:
+        for i, p in enumerate(self._storage):
+            if p.id == post.id:
+                self._storage[i] = post
+                return post
+        return None
+
+    def delete(self, post_id: int) -> bool:
+        for i, p in enumerate(self._storage):
+            if p.id == post_id:
+                del self._storage[i]
+                return True
+        return False
+
 # ✅ 테스트 함수
 def test_create_post_usecase():
     repo = FakePostRepository()

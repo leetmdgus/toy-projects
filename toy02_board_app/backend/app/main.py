@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from presentation.routers import post_router
 from core.database import Base, engine
+from infrastructure.orm import post_model, user_model  # Import models to register them
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
