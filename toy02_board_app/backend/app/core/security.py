@@ -5,8 +5,14 @@ from starlette.requests import Request
 from app.core.config import settings
 from sqladmin.authentication import AuthenticationBackend
 from app.infrastructure.repositories.user_repo_impl import SQLAlchemyUserRepository
+import warnings
 
+# bcrypt 버전 경고 무시 (passlib 내부 버전 판별 충돌 방지)
+warnings.filterwarnings("ignore", message="error reading bcrypt version")
+
+# 비밀번호 해시 설정
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 
 # =====================================================
 # 🔐 기본 JWT & bcrypt 인증 유틸
@@ -17,7 +23,14 @@ def hash_password(password: str):
 
 def verify_password(plain: str, hashed: str):
     """입력된 비밀번호와 해시 일치 여부 확인"""
-    return pwd_context.verify(plain, hashed)
+    try:
+        # bcrypt는 72바이트 초과 시 예외 발생 → truncate로 방어
+        if len(plain.encode("utf-8")) > 72:
+            plain = plain.encode("utf-8")[:72].decode("utf-8")
+        return pwd_context.verify(plain, hashed)
+    except ValueError:
+        # 해시가 평문이거나 bcrypt가 처리 불가한 경우 False 반환
+        return False
 
 def create_access_token(data: dict, expires_minutes: int = None):
     """JWT Access Token 생성"""

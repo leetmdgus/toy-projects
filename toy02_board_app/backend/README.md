@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ```bash
 cd toy02_board_app/backend/app
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ## API 문서
